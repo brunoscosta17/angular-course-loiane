@@ -1,0 +1,91 @@
+<form #form=ngForm (ngSubmit)="onSubmit(form)">
+
+  <div class="formg-group row">
+    <div class="col-sm-12">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Name" name="name" [(ngModel)]="user.name" required
+        #name="ngModel">
+      <small id="nameRequired" class="form-text text-muted required" *ngIf="!name.valid && name.touched">Name is
+        required
+      </small>
+    </div>
+
+    <div class="col-sm-12">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" placeholder="name@email.com" aria-describedby="email"
+        name="email" [(ngModel)]="user.email" required email #email="ngModel">
+      <small id="required" class="form-text text-muted required" *ngIf="!email.valid && email.touched">Email
+        invalid</small>
+      <small id="required" class="form-text text-muted required" *ngIf="!email.value && email.touched">Email
+        is required
+      </small>
+    </div>
+  </div>
+
+  <div ngModelGroup="address">
+    <div class="formg-group row">
+
+      <div class="col-md-3">
+        <label for="cep" class="control-label">CEP</label>
+        <input type="text" class="form-control" id="cep" name="cep" ngModel required #cep="ngModel"
+          (blur)="fetchCEP($event.target.value, form)">
+        <small id="required" class="form-text text-muted required" *ngIf="!cep.valid && cep.touched">CEP is
+          required
+        </small>
+
+      </div>
+
+      <div class="col-sm-9">
+        <label for="street">Rua</label>
+        <input type="text" class="form-control" id="street" name="street" ngModel required #street="ngModel" readonly>
+        <small id="required" class="form-text text-muted required" *ngIf="!street.valid && street.touched">Rua is
+          required
+        </small>
+      </div>
+
+      <div class="col-md-2">
+        <label for="number" class="control-label">Número</label>
+        <input type="text" class="form-control" id="number" name="number" ngModel required #number="ngModel">
+        <small id="required" class="form-text text-muted required" *ngIf="!number.valid && number.touched">Number is
+          required
+        </small>
+      </div>
+
+      <div class="col-md-10">
+        <label for="complement" class="control-label">Complemento</label>
+        <input type="text" class="form-control" id="complement" name="complement" ngModel #complement="ngModel">
+      </div>
+
+      <div class="col-md-5">
+        <label for="district" class="control-label">Bairro</label>
+        <input type="text" class="form-control" id="district" name="district" ngModel required #district="ngModel"
+          readonly>
+        <small id="required" class="form-text text-muted required" *ngIf="!city.valid && city.touched">Bairro is
+          required
+        </small>
+      </div>
+
+      <div class="col-md-5">
+        <label for="city" class="control-label">Cidade</label>
+        <input type="text" class="form-control" id="city" name="city" ngModel required #city="ngModel" readonly>
+        <small id="required" class="form-text text-muted required" *ngIf="!city.valid && city.touched">Cidade is
+          required
+        </small>
+      </div>
+
+      <div class="col-md-2">
+        <label for="state" class="control-label">Estado</label>
+        <input type="text" class="form-control" id="state" name="state" ngModel required #state="ngModel" readonly>
+        <small id="required" class="form-text text-muted required" *ngIf="!state.valid && state.touched">Estado is
+          required
+        </small>
+      </div>
+
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid" style="margin-top: 15px">Submit</button>
+
+  <app-form-debug [form]="form"></app-form-debug>
+
+</form>
