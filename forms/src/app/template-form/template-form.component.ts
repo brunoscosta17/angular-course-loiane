@@ -25,9 +25,13 @@ export class TemplateFormComponent implements OnInit {
     }
   }
 
+  // JSON.parse -> transforma uma string json em objeto ou valor javascript
+  // JSON.stringfy -> transforma um objeto ou valor javascript em json
+
   onSubmit(form) {
     console.log(form);
-    console.log(this.user);
+    this.http.post(`https://httpbin.org/post`, JSON.stringify(form.value))
+      .subscribe(data => console.log(data));
   }
 
   fetchCEP(cep, form) {
